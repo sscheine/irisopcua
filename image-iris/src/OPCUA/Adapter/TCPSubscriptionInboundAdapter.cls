@@ -190,6 +190,8 @@ Method OnTask() As %Status
 			set tSC = ..Connect()
 			$$$ThrowOnError(tSC)
 
+			set ..ResetClientFlag = 0
+			set ..IsConnected = 1
 			$$$LOGINFO("OPCUA adapter connected to "_..URL)			
 		}
 
@@ -378,6 +380,7 @@ Method OnTask() As %Status
 					}
 
 					set ..IsConnected = 0
+					set ..ResetClientFlag = 1
 					set ..QtySequentialEmptyResults = 0
 				}
 
