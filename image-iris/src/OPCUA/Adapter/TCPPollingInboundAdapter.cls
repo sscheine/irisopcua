@@ -120,7 +120,7 @@ Method OnTask() As %Status
 
 		$$$SetHostMonitor(..BusinessHost.%ConfigName,$$$eMonitorStatus,"Error")
 
-		if ##class(%SYSTEM.SQL).DATEDIFF("s",..ConnectionRetryEndTime,$ZTimestamp) > 0 {
+		if ##class(%SYSTEM.SQL).DATEDIFF("s",..ConnectionRetryEndTime,$ZTimestamp) > 0 && (..AlwaysConnect=0){
 			$$$LOGERROR("Connection retry period concluded. Unable to establish connection.")
 			set ..BusinessHost.%QuitTask = 1
 			return tSC

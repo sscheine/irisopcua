@@ -211,13 +211,13 @@ intended to place incoming OPC UA data on a different table/global within IRIS.
 ### Using native IRIS
 - Ensure that your version of IRIS is licensed for Productions.
 - Place the [DLLs](./windows/bin/) (Windows) or [SOs](./image-iris/uacbin/) (Unix) in the bin directory for the instance of IRIS.
--     Open the Management Portal and add a namespace “APPINT”.
--     Open Studio/VS Code and connect to IRIS and the APPINT namespace.
--     Import into Studio/VS Code the material in the [IrisOPCUA_prj.xml](./windows/Studio/IrisOPCUA_prj-20251217.xml) project file, and compile it for use with the connected instance of IRIS.
--     Return to the Management Portal and navigate to
+- Open the Management Portal and add a namespace “APPINT”.
+- Open Studio/VS Code and connect to IRIS and the APPINT namespace.
+- Import into Studio/VS Code the material in the [IrisOPCUA_prj.xml](./windows/Studio/IrisOPCUA_prj-20251217.xml) project file, and compile it for use with the connected instance of IRIS.
+- Return to the Management Portal and navigate to
  <code>Interoperability > Production Configuration > (Examples.OPCUADS.Production)</code>. At this point, you should be able to see the five business service examples.
--     Enable the InternetPollingExample and the InternetSubscriptionExample.
--     Each of the two enabled business services should deposit incoming data on tables/globals that correspond to their names. View the results at <code>System > SQL</code> using SQL queries: e.g. <code>SELECT * FROM Examples_OPCUADS.InternetPollingExample</code>.
+- Enable the InternetPollingExample and the InternetSubscriptionExample.
+- Each of the two enabled business services should deposit incoming data on tables/globals that correspond to their names. View the results at <code>System > SQL</code> using SQL queries: e.g. <code>SELECT * FROM Examples_OPCUADS.InternetPollingExample</code>.
 
 At this time, it is intended that there be six
 OPC UA BusinessService demonstrations available 

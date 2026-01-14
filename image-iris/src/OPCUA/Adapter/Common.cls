@@ -4,7 +4,7 @@ Class OPCUA.Adapter.Common Extends Ens.InboundAdapter
 {
 
 /// Configurable settings
-Parameter SETTINGS = "URL:Connection,ConnectionRetryTimeout:Connection,DataSourceClass:Data,Username:User,Password:User,SecurityMode:Security,ClientURI:Security,PublicCertificate:Security,PrivateKey:Security,TrustListDir:Security,RevocationListDir:Security,LogFileTag:Logging";
+Parameter SETTINGS = "URL:Connection,ConnectionRetryTimeout:Connection,AlwaysConnect:Connection,DataSourceClass:Data,Username:User,Password:User,SecurityMode:Security,ClientURI:Security,PublicCertificate:Security,PrivateKey:Security,TrustListDir:Security,RevocationListDir:Security,LogFileTag:Logging";
 
 // *** PROPERTIES INFLUENCED BY SETTINGS ***
 
@@ -17,6 +17,11 @@ Property URL As %String(MAXLEN = 200);
 /// OPC UA server, after which no more connection attempts
 /// will be made.
 Property ConnectionRetryTimeout As %Integer [ InitialExpression = 600 ];
+
+/// Indicates whether the OPC UA client should always attempt
+/// to connect to the target OPC UA server, regardless of any
+/// previous connection failures. If checked, ConnectionRetryTimeout will be ignored.
+Property AlwaysConnect As %Boolean [ InitialExpression = 0 ];
 
 /// The name of the DataSource class specifying the 
 /// data types and nodes from which to obtain data
