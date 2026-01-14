@@ -304,12 +304,17 @@ Method OnTask() As %Status
 
 		$$$SetHostMonitor(..BusinessHost.%ConfigName,$$$eMonitorStatus,"Error")
 
-		if (##class(%SYSTEM.SQL).DATEDIFF("ms",..ConnectionRetryEndTime,$ZTimestamp) > 0) && (..AlwaysConnect=0) {
-			$$$LOGERROR("Error encountered : Maximum time since a successful response exceeded : "_$SYSTEM.Status.GetErrorText(tSC))
-			if ..IsConnected {
-				set ..IsConnected = 0
+		if (##class(%SYSTEM.SQL).DATEDIFF("ms",..ConnectionRetryEndTime,$ZTimestamp) > 0) {
+			if ..AlwaysConnect {
+				$$$LOGWARNING("Client has not been able to establish the conection within the last "_..ConnectionRetryTimeout_" seconds")
+				set ..ConnectionRetryEndTime = ##class(%SYSTEM.SQL).DATEADD("s",..ConnectionRetryTimeout,$ZTimestamp)
+			} else {
+				$$$LOGERROR("Error encountered : Maximum time since a successful response exceeded : "_$SYSTEM.Status.GetErrorText(tSC))
+				if ..IsConnected {
+					set ..IsConnected = 0
+				}
+				set ..BusinessHost.%QuitTask = 1
 			}
-			set ..BusinessHost.%QuitTask = 1
 			return tSC
 		}
 

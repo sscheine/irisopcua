@@ -15,12 +15,15 @@ Property URL As %String(MAXLEN = 200);
 /// The duration (in seconds), since the last time that 
 /// the OPC UA client was able to connect to the target
 /// OPC UA server, after which no more connection attempts
-/// will be made.
+/// will be made. If AlwaysConnect is checked, a warning will
+/// be issued instead
 Property ConnectionRetryTimeout As %Integer [ InitialExpression = 600 ];
 
 /// Indicates whether the OPC UA client should always attempt
 /// to connect to the target OPC UA server, regardless of any
-/// previous connection failures. If checked, ConnectionRetryTimeout will be ignored.
+/// previous connection failures. If checked, a warning will
+/// be periodically issued after the duration specified 
+/// in ConnectionRetryTimeout
 Property AlwaysConnect As %Boolean [ InitialExpression = 0 ];
 
 /// The name of the DataSource class specifying the 
@@ -145,7 +148,7 @@ Method Connect() As %Status [ Private ]
 
 			} else {
 
-				$$$TRACE("OPCUA Client reset [c.c]")
+				$$$LOGINFO("OPCUA Client reset [c.c]")
 			}
 		}
 
