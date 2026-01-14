@@ -5,6 +5,16 @@ OPC UA to access data and subsequently store that data in tables/globals.
 A simple method by which small amounts of data can be written to an 
 OPC UA server using ObjectScript is also implemented.
 
+## ToC
+- [OPC UA Basics](#opc-ua-basics)
+- [The IRIS OPC UA Adapter Client](#the-iris-opc-ua-adapter-client)
+- [Polling Access vs. OPC UA Subscription](#polling-access-vs-opc-ua-subscription)
+- [Security](#security)
+- [Running the Demos Importing Data into IRIS](#running-the-demos-importing-data-into-iris)
+- [SimpleWrite and SecureWrite Demos](#simplewrite-and-securewrite-demos)
+- [Future Work](#future-work)
+- [Product Availabilty](#product-availability)
+
 ## OPC UA Basics
 
 OPC UA is a client-server protocol by which data and 
@@ -185,6 +195,7 @@ Windows, Mac OS, and Docker/Ubuntu platforms.
 
 ## Running the Demos Importing Data into IRIS
 
+### Using Docker
 The demos in this repository can be run using only a few steps:
 
 * Download the relevant code from GitHub.
@@ -196,6 +207,17 @@ with username "SuperUser" and password "sys".
 * Enable any of the IRIS Business Services found at the left hand side of the screen. 
 Each is itself a separate demo, each 
 intended to place incoming OPC UA data on a different table/global within IRIS.
+
+### Using native IRIS
+- Ensure that your version of IRIS is licensed for Productions.
+- Place the [DLLs](./windows/bin/) (Windows) or [SOs](./image-iris/uacbin/) (Unix) in the bin directory for the instance of IRIS.
+-     Open the Management Portal and add a namespace “APPINT”.
+-     Open Studio/VS Code and connect to IRIS and the APPINT namespace.
+-     Import into Studio/VS Code the material in the [IrisOPCUA_prj.xml](./windows/Studio/IrisOPCUA_prj-20251217.xml) project file, and compile it for use with the connected instance of IRIS.
+-     Return to the Management Portal and navigate to
+ <code>Interoperability > Production Configuration > (Examples.OPCUADS.Production)</code>. At this point, you should be able to see the five business service examples.
+-     Enable the InternetPollingExample and the InternetSubscriptionExample.
+-     Each of the two enabled business services should deposit incoming data on tables/globals that correspond to their names. View the results at <code>System > SQL</code> using SQL queries: e.g. <code>SELECT * FROM Examples_OPCUADS.InternetPollingExample</code>.
 
 At this time, it is intended that there be six
 OPC UA BusinessService demonstrations available 
